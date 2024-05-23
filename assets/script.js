@@ -1,23 +1,24 @@
 /* ---------- REGLAGE GENERAL DE CHARGEMENT ----------*/
 
 // Décrit l'état de chargement du fichier document : différer le lancement du script tant que le doc et ttes les sous-ressources n'ont pas fini de se charger 
-if (document.readyState === "complete") {
+if (document.readyState === "complete") { // si etat de lecture du document est complète
 	monScript();
-  } else {
-	document.addEventListener("DOMContentLoaded", function () {
-	  monScript();
+  } else { // alors mon script peut être chargé
+	document.addEventListener("DOMContentLoaded", function () { //une fois que l’addEventListener est exécuté, la fonction passée en paramètre ne se lance pas immédiatement. Cette dernière sera lancée au moment où l'événement qu’on écoute (ici, "DOMContentLoaded") se produit.
+	  monScript();   
 	});
   }
   
   function monScript() {
-	alert("Et Hop !");
+	alert("Et Hop !"); // alerte pour tester le foctionnement de mon script
 
 /* ---------- FIN REGLAGE GENERAL DE CHARGEMENT ----------*/
 
   
 /* ---------- REGLAGE CONCERNANT LES IMAGES ----------*/
 
-	//Tableau non modifié
+	//Tableau non modifié-Les images sont stockées ici, cela m’a permis de les retrouver en un seul endroit, et de limiter le nombre de variables dans mon code.
+
 	const slides = [
 	  {
 		image: "slide1.jpg",
@@ -39,9 +40,9 @@ if (document.readyState === "complete") {
 	];
   
 	//Information concernant le rôle slider + position de la 1ère image + localisation des images
-	let nbElement = slides.length - 1;
+	let nbElement = slides.length - 1; //Pour connaître le nombre d’éléments que contient mon tableau, j'accéde à la propriété length - JS est indexé à 0 afin de parcourir mon tableau entier,je définis la limite maximale length-1
 	let numDot = 0;
-	let srcImage = "./assets/images/slideshow/";
+	let srcImage = "./assets/images/slideshow/"; //emplacement des images
 
 	// Méthode qui consiste à retourner ces Elements dans le document correspondant au sélecteur 
 	const bannerImg = document.querySelector(".banner-img");
@@ -55,12 +56,13 @@ if (document.readyState === "complete") {
 /* ---------- REGLAGE DES FLECHES ET LES BULLETS POINTS ----------*/
   
 	// Flêches qui s'affichent lors du lancement du script
-	arrowLeft.classList.remove("hidden");
+	arrowLeft.classList.remove("hidden");//classlist propriété spécifique qui permet de modifier des classes + methode remove
 	arrowRight.classList.remove("hidden");
   
 	// Création des bullets points
-	for (let pas = 0; pas <= nbElement; pas++) {
-	  dots.innerHTML +=
+	for (let pas = 0; pas <= nbElement; pas++) { //La boucle for permet de répéter du code lorsque l’on sait d’avance combien de fois il faudra le répéter.
+
+	  dots.innerHTML += //méthode innerHTML pour créer nos éléments
 		'<span id="dot' +
 		pas +
 		'" class="dot" title="Image ' +
@@ -75,9 +77,9 @@ if (document.readyState === "complete") {
 	const addSelected = () => {
 	  for (let pas = 0; pas <= nbElement; pas++) {
 		if (pas === numDot) {
-		  dotList[pas].classList.add("dot_selected");
+		  dotList[pas].classList.add("dot_selected"); //ajouter
 		} else {
-		  dotList[pas].classList.remove("dot_selected");
+		  dotList[pas].classList.remove("dot_selected");//supprimer
 		}
 	  }
 	};
